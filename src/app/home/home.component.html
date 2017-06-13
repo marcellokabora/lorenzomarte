@@ -1,0 +1,34 @@
+<div class="home-grid" *ngIf="!onmobile; else elseMobile">
+  <md-grid-list cols="4" rowHeight="1:1">
+    <md-grid-tile
+      *ngFor="let item of gridlist | async" 
+      class="grid-item"
+      [colspan]="item.gridc"
+      [rowspan]="item.gridr">
+      <div class="item-back" 
+      [routerLink]="[item.url]" 
+      [ngStyle]="{'background': 'url(' + baseurl + 'event%2F' + item.cover + '?alt=media) center / cover'}"></div>
+      <span class="grid-tito" [routerLink]="[item.url]">{{item.title}}</span>
+      <button *ngIf="imlogin" md-icon-button class="btn-set" (click)="prodSett(item.$key)"><md-icon>settings_ethernet</md-icon></button>
+    </md-grid-tile>
+  </md-grid-list>
+</div>
+
+<ng-template #elseMobile>
+  <div class="home-grid">
+    <md-grid-list cols="2">
+      <md-grid-tile
+        *ngFor="let item of gridlist | async" 
+        class="grid-item"
+        [colspan]="2"
+        [rowspan]="1"
+        [ngStyle]="{'background': 'url(' + baseurl + 'event%2F' + item.cover + '?alt=media) center / cover'}">
+        <span class="grid-tito" [routerLink]="[item.url]">{{item.title}}</span>
+        <button *ngIf="imlogin" md-icon-button class="btn-set" (click)="prodSett(item.$key)"><md-icon>settings_ethernet</md-icon></button>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+</ng-template>
+
+
+
